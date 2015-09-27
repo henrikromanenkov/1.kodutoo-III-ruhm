@@ -3,21 +3,21 @@
 	//echo$_POST["email"];
 	//echo$_POST["password"];
 	
-	$email1_error = "";
-	$email2_error = "";
-	$password1_error = "";
-	$password2_error = "";
-	$name1_error = "";
-	$name2_error = "";
+	$log_email_error = "";
+	$user_email_error = "";
+	$log_password_error = "";
+	$user_password_error = "";
+	$lastname_error = "";
+	$firstname_error = "";
 	
 	//muutujad ab väärtuste jaoks
 	
-	$email1 = "";
-	$email2 = "";
-	$name1 = "";
-	$name2 = "";
-	$password1 = "";
-	$password2 = "";
+	$log_email = "";
+	$user_email = "";
+	$lastname = "";
+	$firstname = "";
+	$log_password = "";
+	$user_password = "";
 	
 	//kontrollime, et keegi vajutas input nuppu.
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -31,24 +31,24 @@
 			echo "Vajutas login nuppu!";
 			
 			//kontrollin, et e-post ei ole tühi
-			if(empty($_POST["email1"]) ){
-				$email1_error = " See väli on kohustuslik.";
+			if(empty($_POST["log_email"]) ){
+				$log_email_error = " See väli on kohustuslik.";
 			}else{
 				
-				$email1 = test_input($_POST["email1"]);
+				$log_email = test_input($_POST["log_email"]);
 			
 			}	
 				
 			//kontrollin, et parool ei ole tühi
-			if(empty($_POST["password1"]) ){
-				$password1_error = "See väli on kohustuslik.";
+			if(empty($_POST["log_password"]) ){
+				$log_password_error = "See väli on kohustuslik.";
 			}else{
 				
 				// kui oleme siia jõudnud, siis parool ei ole tühi
 				// kontrollin, et oleks vähemalt 8 sümbolit pikk
-				if(strlen($_POST["password1"])<8) {
+				if(strlen($_POST["log_password"])<8) {
 					
-				$password1_error = "Peab olema vähemalt 8 tähemärki pikk";
+				$log_password_error = "Peab olema vähemalt 8 tähemärki pikk";
 				
 				}
 			
@@ -56,9 +56,9 @@
 			}
 			
 			//kontrollin et ei oleks ühtegi errorit
-			if($email1_error == ""&& $password1_error ==""){
+			if($log_email_error == ""&& $log_password_error ==""){
 				
-				echo "kontrollin sisselogimist".$email1." ja parool ";
+				echo "kontrollin sisselogimist".$log_email." ja parool ";
 			}
 			
 			
@@ -68,55 +68,55 @@
 			
 			echo "Vajutas create nuppu!";
 			
-			if(empty($_POST["email2"]) ){
-				$email2_error = " See väli on kohustuslik.";
+			if(empty($_POST["user_email"]) ){
+				$user_email_error = " See väli on kohustuslik.";
 			}else{
 				
-				$email2 = test_input($_POST["email2"]);
+				$user_email = test_input($_POST["user_email"]);
 			}
 			
 			//kontrollin, et parool ei ole tühi
-			if(empty($_POST["password2"]) ){
-				$password2_error = "See väli on kohustuslik.";
+			if(empty($_POST["user_password"]) ){
+				$user_password_error = "See väli on kohustuslik.";
 			}else{
 				
 				// kui oleme siia jõudnud, siis parool ei ole tühi
 				// kontrollin, et oleks vähemalt 8 sümbolit pikk
-				if(strlen($_POST["password2"])<8) {
+				if(strlen($_POST["user_password"])<8) {
 					
-				$password2_error = "Peab olema vähemalt 8 tähemärki pikk";
+				$user_password_error = "Peab olema vähemalt 8 tähemärki pikk";
 				
 				}
 			}
 				
 			//valideerimine create user vormile
 			//kontrollin, et perekonnanimi ei ole tühi
-			if( empty($_POST["name1"]) ) {
-				$name1_error = "See väli on kohustuslik";
+			if( empty($_POST["lastname"]) ) {
+				$lastname_error = "See väli on kohustuslik";
 			}else{
 				//kõik korras
 				//test_input eemaldab pahatahtlikud osad
-				$name1 = test_input($_POST["name1"]);
+				$lastname = test_input($_POST["lastname"]);
 			
 				
 			}
-			if($name1_error == ""){
-				echo "salvestan ab'i".$name1;
+			if($lastname_error == ""){
+				echo "salvestan ab'i".$lastname;
 			}
 			
 			//valideerimine create user vormile
 			//kontrollin, et eesnimi ei ole tühi
-			if( empty($_POST["name2"]) ) {
-				$name2_error = "See väli on kohustuslik";
+			if( empty($_POST["firstname"]) ) {
+				$firstname_error = "See väli on kohustuslik";
 			}else{
 				//kõik korras
 				//test_input eemaldab pahatahtlikud osad
-				$name2 = test_input($_POST["name2"]);
+				$firstname = test_input($_POST["firstname"]);
 			
 				
 			}
-			if($name2_error == ""){
-				echo "salvestan ab'i".$name2;
+			if($firstname_error == ""){
+				echo "salvestan ab'i".$firstname;
 			}
 		
 		}
@@ -143,18 +143,18 @@
 	
 	<h2>Log in</h2>
 		<form action="login.php" method="post">
-			<input name="email1" type="email" placeholder="E-post" value="<?php echo $email1; ?>">* <?php echo $email1_error; ?> <br><br>
-			<input name="password1" type="password" placeholder="Parool" value="<?php echo $password1; ?>">* <?php echo $password1_error; ?> <br><br>
+			<input name="log_email" type="email" placeholder="E-post" value="<?php echo $log_email; ?>">* <?php echo $log_email_error; ?> <br><br>
+			<input name="log_password" type="password" placeholder="Parool" value="<?php echo $log_password; ?>">* <?php echo $log_password_error; ?> <br><br>
 			<input name="login" type="submit" value="Log in"> 
 		</form>
 		
 	<h2>Create user</h2>
 	
 		<form action="login.php" method="post">
-			<input name="email2" type="email" placeholder="E-post" value="<?php echo $email2; ?>">* <?php echo $email2_error; ?> <br><br>
-			<input name="password2" type="password" placeholder="Parool" value="<?php echo $password2; ?>">* <?php echo $password2_error; ?> <br><br>
-			<input name="name1" type="text" placeholder="Perekonnanimi" value="<?php echo $name1; ?>">* <?php echo$name1_error; ?><br><br>
-			<input name="name2" type="text" placeholder="Eesnimi" value="<?php echo $name2; ?>">* <?php echo$name2_error; ?><br><br>
+			<input name="user_email" type="email" placeholder="E-post" value="<?php echo $user_email; ?>">* <?php echo $user_email_error; ?> <br><br>
+			<input name="user_password" type="password" placeholder="Parool" value="<?php echo $user_password; ?>">* <?php echo $user_password_error; ?> <br><br>
+			<input name="lastname" type="text" placeholder="Perekonnanimi" value="<?php echo $lastname; ?>">* <?php echo$lastname_error; ?><br><br>
+			<input name="firstname" type="text" placeholder="Eesnimi" value="<?php echo $firstname; ?>">* <?php echo$firstname_error; ?><br><br>
 			<input name="create" type="submit" value="Create">
 		</form>
 		
